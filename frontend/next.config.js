@@ -4,10 +4,9 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    unoptimized: true,
+    domains: ['apex-front-end-puce.vercel.app'],
+    unoptimized: true, // This allows serving static images from public folder
   },
-  trailingSlash: true,
-  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://apex-front-end-puce.vercel.app' : '',
 }
 
 module.exports = nextConfig
