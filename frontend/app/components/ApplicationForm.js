@@ -53,6 +53,7 @@ export default function ApplicationForm({ onClose }) {
       ...prev,
       [field]: value
     }));
+    // Clear error when user starts typing
     if (error) setError('');
   };
 
@@ -94,6 +95,7 @@ export default function ApplicationForm({ onClose }) {
       if (response.status === 201) {
         setSubmitted(true);
         
+        // Reset form
         setFormData({
           companyName: '',
           contactPerson: '',
@@ -144,7 +146,7 @@ export default function ApplicationForm({ onClose }) {
                 alt="APEX FINANCIAL HUB"
                 width={120}
                 height={50}
-                className="rounded-lg"
+                className="rounded-lg object-cover"
               />
             </div>
           </div>
@@ -186,7 +188,7 @@ export default function ApplicationForm({ onClose }) {
               alt="APEX FINANCIAL HUB"
               width={80}
               height={35}
-              className="rounded-md"
+              className="rounded-md object-cover"
             />
           </div>
           <div>
@@ -216,27 +218,177 @@ export default function ApplicationForm({ onClose }) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6 max-h-[70vh] overflow-y-auto pr-2">
-        {/* Rest of the form remains the same, just update colors */}
+        {/* Company Information */}
         <div className="bg-primary-50 p-4 rounded-lg">
           <h3 className="text-lg font-semibold text-primary-900 mb-4">Company Information</h3>
-          {/* ... form fields ... */}
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-primary-700 mb-2">
+                Company Name *
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.companyName}
+                onChange={(e) => handleInputChange('companyName', e.target.value)}
+                className="w-full px-3 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="Enter company name"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-primary-700 mb-2">
+                Contact Person *
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.contactPerson}
+                onChange={(e) => handleInputChange('contactPerson', e.target.value)}
+                className="w-full px-3 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="Full name of contact person"
+              />
+            </div>
+          </div>
         </div>
 
+        {/* Contact Information */}
         <div className="bg-primary-50 p-4 rounded-lg">
           <h3 className="text-lg font-semibold text-primary-900 mb-4">Contact Information</h3>
-          {/* ... form fields ... */}
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-primary-700 mb-2">
+                Email Address *
+              </label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className="w-full px-3 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-primary-700 mb-2">
+                Phone Number *
+              </label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
+                className="w-full px-3 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="+27 XXX XXX XXXX"
+              />
+            </div>
+          </div>
         </div>
 
+        {/* Business Details */}
         <div className="bg-primary-50 p-4 rounded-lg">
           <h3 className="text-lg font-semibold text-primary-900 mb-4">Business Details</h3>
-          {/* ... form fields ... */}
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-primary-700 mb-2">
+                Company Type *
+              </label>
+              <select
+                value={formData.companyType}
+                onChange={(e) => handleInputChange('companyType', e.target.value)}
+                className="w-full px-3 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              >
+                {companyTypes.map((type) => (
+                  <option key={type.value} value={type.value}>
+                    {type.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-primary-700 mb-3">
+                Required Services *
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {serviceOptions.map((service) => (
+                  <label key={service} className="flex items-center space-x-3 p-3 border border-primary-200 rounded-lg hover:bg-white transition-colors cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={formData.services.includes(service)}
+                      onChange={() => handleServiceToggle(service)}
+                      className="rounded border-primary-300 text-primary-600 focus:ring-primary-500"
+                    />
+                    <span className="text-sm text-primary-700 flex-1">{service}</span>
+                  </label>
+                ))}
+              </div>
+              <p className="text-xs text-primary-500 mt-2">
+                Selected: {formData.services.length} service(s)
+              </p>
+            </div>
+          </div>
         </div>
 
+        {/* Payment Plan */}
         <div className="bg-primary-50 p-4 rounded-lg">
           <h3 className="text-lg font-semibold text-primary-900 mb-4">Payment Plan</h3>
-          {/* ... form fields ... */}
+          
+          <div className="space-y-3">
+            <label className="flex items-start space-x-3 p-4 border-2 border-primary-200 bg-primary-50 rounded-lg cursor-pointer">
+              <input
+                type="radio"
+                value="annual"
+                checked={formData.paymentPlan === 'annual'}
+                onChange={(e) => handleInputChange('paymentPlan', e.target.value)}
+                className="mt-1 text-primary-600 focus:ring-primary-500"
+              />
+              <div className="flex-1">
+                <div className="font-semibold text-primary-900">Annual Payment</div>
+                <div className="text-2xl font-bold text-primary-600 my-1">R12,000</div>
+                <div className="text-sm text-primary-600">Pay once per year and save</div>
+                <ul className="text-sm text-primary-600 mt-2 space-y-1">
+                  <li>✓ All services included</li>
+                  <li>✓ No monthly payments</li>
+                  <li>✓ Priority support</li>
+                </ul>
+              </div>
+            </label>
+
+            <label className="flex items-start space-x-3 p-4 border-2 border-primary-200 rounded-lg hover:border-primary-300 cursor-pointer">
+              <input
+                type="radio"
+                value="monthly"
+                checked={formData.paymentPlan === 'monthly'}
+                onChange={(e) => handleInputChange('paymentPlan', e.target.value)}
+                className="mt-1 text-primary-600 focus:ring-primary-500"
+              />
+              <div className="flex-1">
+                <div className="font-semibold text-primary-900">Monthly Payment</div>
+                <div className="text-2xl font-bold text-primary-600 my-1">R1,000/month</div>
+                <div className="text-sm text-primary-600">Flexible monthly payments</div>
+                <ul className="text-sm text-primary-600 mt-2 space-y-1">
+                  <li>✓ All services included</li>
+                  <li>✓ R2,000 deposit required</li>
+                  <li>✓ Debit order convenience</li>
+                </ul>
+              </div>
+            </label>
+          </div>
+          
+          <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <p className="text-sm text-yellow-800">
+              <strong>Note:</strong> The fee covers application and administrative services only. 
+              Any charges due to service providers (e.g., CIPC filing fees) are additional.
+            </p>
+          </div>
         </div>
 
+        {/* Form Actions */}
         <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-primary-200">
           <button
             type="submit"

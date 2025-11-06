@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Image from 'next/image';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? process.env.NEXT_PUBLIC_API_URL 
@@ -253,13 +254,16 @@ export default function AdminPortal() {
             <div className="text-center">
               {/* APEX FINANCIAL HUB Logo */}
               <div className="flex justify-center mb-6">
-                <div className="bg-primary-600 rounded-xl p-6 shadow-lg">
-                  <div className="text-white font-bold text-xl leading-tight text-center">
-                    <div className="text-lg font-extrabold tracking-wide">APEX</div>
-                    <div className="text-base font-semibold tracking-wider">FINANCIAL HUB</div>
-                  </div>
-                  <div className="mt-1 text-primary-200 text-sm text-center">
-                    in partnership with TIMVEST
+                <div className="bg-primary-600 rounded-xl p-4">
+                  <Image
+                    src="/images/apex-logo.jpg"
+                    alt="APEX FINANCIAL HUB"
+                    width={150}
+                    height={60}
+                    className="rounded-lg mx-auto object-cover"
+                  />
+                  <div className="mt-2 text-white text-sm font-semibold">
+                    in partnership with <span className="font-bold">TIMVEST</span>
                   </div>
                 </div>
               </div>
@@ -362,10 +366,13 @@ export default function AdminPortal() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
               <div className="bg-primary-600 rounded-lg p-2 flex items-center justify-center">
-                <div className="text-white font-bold text-sm leading-tight text-center min-w-[60px]">
-                  <div className="text-xs font-extrabold">APEX</div>
-                  <div className="text-[10px] font-semibold">FINANCIAL HUB</div>
-                </div>
+                <Image
+                  src="/images/apex-logo.jpg"
+                  alt="APEX FINANCIAL HUB"
+                  width={80}
+                  height={35}
+                  className="rounded-md object-cover"
+                />
               </div>
               <div className="h-8 w-px bg-primary-200"></div>
               <div>
@@ -677,11 +684,14 @@ export default function AdminPortal() {
             <div className="p-6">
               <div className="flex justify-between items-center mb-6 pb-4 border-b border-primary-200">
                 <div className="flex items-center space-x-4">
-                  <div className="bg-primary-600 rounded-lg p-3 flex items-center justify-center">
-                    <div className="text-white font-bold text-sm leading-tight text-center">
-                      <div className="text-xs font-extrabold">APEX</div>
-                      <div className="text-[10px] font-semibold">FINANCIAL HUB</div>
-                    </div>
+                  <div className="bg-primary-100 rounded-lg p-2">
+                    <Image
+                      src="/images/apex-logo.jpg"
+                      alt="APEX FINANCIAL HUB"
+                      width={80}
+                      height={35}
+                      className="rounded-md object-cover"
+                    />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-primary-900">Application Details</h2>

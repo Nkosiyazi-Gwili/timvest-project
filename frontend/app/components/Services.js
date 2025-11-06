@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Services() {
   const services = [
     {
@@ -42,14 +44,14 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
-            <div className="bg-primary-600 rounded-xl p-6 shadow-lg">
-              <div className="text-white font-bold text-xl leading-tight text-center">
-                <div className="text-lg font-extrabold tracking-wide">APEX</div>
-                <div className="text-base font-semibold tracking-wider">FINANCIAL HUB</div>
-              </div>
-              <div className="mt-1 text-primary-200 text-sm">
-                in partnership with TIMVEST
-              </div>
+            <div className="bg-primary-100 rounded-xl p-4 inline-flex">
+              <Image
+                src="/images/apex-logo.jpg"
+                alt="APEX FINANCIAL HUB"
+                width={150}
+                height={60}
+                className="rounded-lg"
+              />
             </div>
           </div>
           <h2 className="text-4xl font-bold text-primary-900 mb-4">Comprehensive Business Services</h2>
@@ -58,7 +60,6 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Rest of the component remains the same */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {services.map((service, index) => (
             <div key={index} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all border border-primary-100 hover:border-primary-300 transform hover:-translate-y-2">

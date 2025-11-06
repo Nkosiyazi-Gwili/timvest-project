@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Footer() {
   return (
     <footer className="bg-primary-900 text-white py-12">
@@ -5,11 +7,14 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-4 mb-4">
-              <div className="bg-primary-700 rounded-lg p-3 flex items-center justify-center">
-                <div className="text-white font-bold text-sm leading-tight text-center">
-                  <div className="text-xs font-extrabold">APEX</div>
-                  <div className="text-[10px] font-semibold">FINANCIAL HUB</div>
-                </div>
+              <div className="bg-primary-700 rounded-lg p-2 flex items-center justify-center">
+                <Image
+                  src="/images/apex-logo.jpg"
+                  alt="APEX FINANCIAL HUB"
+                  width={80}
+                  height={35}
+                  className="rounded-md object-cover"
+                />
               </div>
               <div className="h-8 w-px bg-primary-700"></div>
               <div className="flex flex-col">
