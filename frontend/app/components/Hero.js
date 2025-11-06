@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function Hero({ onApplyNow }) {
   return (
     <section className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20">
@@ -7,16 +5,12 @@ export default function Hero({ onApplyNow }) {
         {/* APEX FINANCIAL HUB Logo */}
         <div className="flex justify-center mb-8">
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-2xl">
-            <Image
-              src="/images/apex-logo.jpg"
-              alt="APEX FINANCIAL HUB"
-              width={200}
-              height={80}
-              className="rounded-lg mx-auto"
-            />
-            <div className="mt-2 text-white font-bold text-lg leading-tight text-center">
-              <div className="text-primary-100">in partnership with</div>
-              <div className="text-xl text-white font-bold mt-1">TIMVEST</div>
+            <div className="text-white font-bold text-2xl leading-tight text-center">
+              <div className="text-lg font-extrabold tracking-wide">APEX</div>
+              <div className="text-sm font-semibold tracking-wider">FINANCIAL HUB</div>
+            </div>
+            <div className="mt-2 text-primary-100 text-sm">
+              in partnership with <span className="font-bold text-white">TIMVEST</span>
             </div>
           </div>
         </div>
@@ -26,6 +20,7 @@ export default function Hero({ onApplyNow }) {
           <span className="block text-primary-200 mt-2">APEX FINANCIAL HUB</span>
         </h1>
         
+        {/* Rest of the component remains the same */}
         <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
           Exclusive Business Start-Up & Compliance Hub Package. 
           Get your business compliant and thriving with our all-inclusive welcome package.
@@ -43,7 +38,6 @@ export default function Hero({ onApplyNow }) {
           </button>
         </div>
 
-        {/* Trust Indicators */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {[
             { value: '100%', label: 'Compliance Guarantee' },

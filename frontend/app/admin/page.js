@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Image from 'next/image';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? process.env.NEXT_PUBLIC_API_URL 
@@ -219,14 +218,14 @@ export default function AdminPortal() {
   const exportToCSV = () => {
     const headers = ['Company Name', 'Contact Person', 'Email', 'Phone', 'Company Type', 'Payment Plan', 'Status', 'Applied Date'];
     const csvData = filteredApplications.map(app => [
-      app.companyName,
-      app.contactPerson,
-      app.email,
-      app.phone,
-      app.companyType,
-      app.paymentPlan,
-      app.status,
-      formatDate(app.createdAt)
+      `"${app.companyName}"`,
+      `"${app.contactPerson}"`,
+      `"${app.email}"`,
+      `"${app.phone}"`,
+      `"${app.companyType}"`,
+      `"${app.paymentPlan}"`,
+      `"${app.status}"`,
+      `"${formatDate(app.createdAt)}"`
     ]);
 
     const csvContent = [
@@ -238,9 +237,12 @@ export default function AdminPortal() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `applications-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `apex-applications-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
     window.URL.revokeObjectURL(url);
+    
+    setSuccessMessage('Applications exported to CSV successfully!');
+    setTimeout(() => setSuccessMessage(''), 3000);
   };
 
   if (!user) {
@@ -251,16 +253,13 @@ export default function AdminPortal() {
             <div className="text-center">
               {/* APEX FINANCIAL HUB Logo */}
               <div className="flex justify-center mb-6">
-                <div className="bg-primary-600 rounded-xl p-4 shadow-lg">
-                  <Image
-                    src="/images/apex-logo.jpg"
-                    alt="APEX FINANCIAL HUB"
-                    width={150}
-                    height={60}
-                    className="rounded-lg mx-auto"
-                  />
-                  <div className="mt-2 text-white text-sm font-semibold">
-                    in partnership with <span className="font-bold">TIMVEST</span>
+                <div className="bg-primary-600 rounded-xl p-6 shadow-lg">
+                  <div className="text-white font-bold text-xl leading-tight text-center">
+                    <div className="text-lg font-extrabold tracking-wide">APEX</div>
+                    <div className="text-base font-semibold tracking-wider">FINANCIAL HUB</div>
+                  </div>
+                  <div className="mt-1 text-primary-200 text-sm text-center">
+                    in partnership with TIMVEST
                   </div>
                 </div>
               </div>
@@ -363,13 +362,10 @@ export default function AdminPortal() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
               <div className="bg-primary-600 rounded-lg p-2 flex items-center justify-center">
-                <Image
-                  src="/images/apex-logo.jpg"
-                  alt="APEX FINANCIAL HUB"
-                  width={80}
-                  height={35}
-                  className="rounded-md"
-                />
+                <div className="text-white font-bold text-sm leading-tight text-center min-w-[60px]">
+                  <div className="text-xs font-extrabold">APEX</div>
+                  <div className="text-[10px] font-semibold">FINANCIAL HUB</div>
+                </div>
               </div>
               <div className="h-8 w-px bg-primary-200"></div>
               <div>
@@ -492,7 +488,7 @@ export default function AdminPortal() {
         <div className="bg-white shadow-sm rounded-xl border border-primary-100 overflow-hidden">
           <div className="px-6 py-4 border-b border-primary-200 bg-primary-50">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-              <h2 className="text-xl font-semibold text-primary-900">Applications</h2>
+              <h2 className="text-xl font-semibold text-primary-900">Business Applications</h2>
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                 {/* Search */}
                 <div className="relative">
@@ -501,7 +497,7 @@ export default function AdminPortal() {
                     placeholder="Search applications..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-4 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                    className="pl-10 pr-4 py-2 border border-primary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors w-64"
                   />
                   <svg className="w-4 h-4 text-primary-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -603,7 +599,7 @@ export default function AdminPortal() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                           <button
                             onClick={() => viewApplicationDetails(application)}
-                            className="text-primary-600 hover:text-primary-900 transition-colors"
+                            className="text-primary-600 hover:text-primary-900 transition-colors px-2 py-1 rounded hover:bg-primary-100"
                           >
                             View
                           </button>
@@ -611,13 +607,13 @@ export default function AdminPortal() {
                             <>
                               <button
                                 onClick={() => updateApplicationStatus(application.id, 'approved')}
-                                className="text-green-600 hover:text-green-900 transition-colors"
+                                className="text-green-600 hover:text-green-900 transition-colors px-2 py-1 rounded hover:bg-green-100"
                               >
                                 Approve
                               </button>
                               <button
                                 onClick={() => updateApplicationStatus(application.id, 'rejected')}
-                                className="text-red-600 hover:text-red-900 transition-colors"
+                                className="text-red-600 hover:text-red-900 transition-colors px-2 py-1 rounded hover:bg-red-100"
                               >
                                 Reject
                               </button>
@@ -681,14 +677,11 @@ export default function AdminPortal() {
             <div className="p-6">
               <div className="flex justify-between items-center mb-6 pb-4 border-b border-primary-200">
                 <div className="flex items-center space-x-4">
-                  <div className="bg-primary-100 rounded-lg p-2">
-                    <Image
-                      src="/images/apex-logo.jpg"
-                      alt="APEX FINANCIAL HUB"
-                      width={80}
-                      height={35}
-                      className="rounded-md"
-                    />
+                  <div className="bg-primary-600 rounded-lg p-3 flex items-center justify-center">
+                    <div className="text-white font-bold text-sm leading-tight text-center">
+                      <div className="text-xs font-extrabold">APEX</div>
+                      <div className="text-[10px] font-semibold">FINANCIAL HUB</div>
+                    </div>
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-primary-900">Application Details</h2>
