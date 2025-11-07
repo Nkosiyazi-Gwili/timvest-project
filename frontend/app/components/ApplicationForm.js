@@ -7,6 +7,8 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
   ? process.env.NEXT_PUBLIC_API_URL 
   : 'http://localhost:5000';
 
+const LOGO_URL = 'https://i.postimg.cc/ZRSDXsHV/Whats-App-Image-2025-11-06-at-15-43-48-d0cd4c60.jpg';
+
 export default function ApplicationForm({ onClose }) {
   const [formData, setFormData] = useState({
     companyName: '',
@@ -142,7 +144,7 @@ export default function ApplicationForm({ onClose }) {
           <div className="flex justify-center mb-6">
             <div className="bg-primary-100 rounded-xl p-4">
               <Image
-                src="/images/apex-logo.jpg"
+                src={LOGO_URL}
                 alt="APEX FINANCIAL HUB"
                 width={120}
                 height={50}
@@ -184,7 +186,7 @@ export default function ApplicationForm({ onClose }) {
         <div className="flex items-center space-x-4">
           <div className="bg-primary-100 rounded-lg p-2">
             <Image
-              src="/images/apex-logo.jpg"
+              src={LOGO_URL}
               alt="APEX FINANCIAL HUB"
               width={80}
               height={35}

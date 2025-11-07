@@ -1,6 +1,6 @@
-import Image from 'next/image';
-
 export default function Services() {
+  const logoUrl = 'https://i.postimg.cc/ZRSDXsHV/Whats-App-Image-2025-11-06-at-15-43-48-d0cd4c60.jpg';
+  
   const services = [
     {
       icon: '🏢',
@@ -45,12 +45,12 @@ export default function Services() {
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
             <div className="bg-primary-100 rounded-xl p-4 inline-flex">
-              <Image
-                src="/images/apex-logo.jpg"
+              <img
+                src={logoUrl}
                 alt="APEX FINANCIAL HUB"
                 width={150}
                 height={60}
-                className="rounded-lg"
+                className="rounded-lg object-cover"
               />
             </div>
           </div>

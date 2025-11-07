@@ -1,19 +1,18 @@
-import Image from 'next/image';
-
 export default function Hero({ onApplyNow }) {
+  const logoUrl = 'https://i.postimg.cc/ZRSDXsHV/Whats-App-Image-2025-11-06-at-15-43-48-d0cd4c60.jpg';
+
   return (
     <section className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* APEX FINANCIAL HUB Logo */}
         <div className="flex justify-center mb-8">
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-2xl">
-            <Image
-              src="/images/apex-logo.jpg"
+            <img
+              src={logoUrl}
               alt="APEX FINANCIAL HUB"
               width={200}
               height={80}
-              className="rounded-lg mx-auto"
-              priority
+              className="rounded-lg mx-auto object-cover"
             />
             <div className="mt-2 text-primary-100 text-sm">
               in partnership with <span className="font-bold text-white">TIMVEST</span>

@@ -1,6 +1,6 @@
-import Image from 'next/image';
-
 export default function Footer() {
+  const logoUrl = 'https://i.postimg.cc/ZRSDXsHV/Whats-App-Image-2025-11-06-at-15-43-48-d0cd4c60.jpg';
+
   return (
     <footer className="bg-primary-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,8 +8,8 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-4 mb-4">
               <div className="bg-primary-700 rounded-lg p-2 flex items-center justify-center">
-                <Image
-                  src="/images/apex-logo.jpg"
+                <img
+                  src={logoUrl}
                   alt="APEX FINANCIAL HUB"
                   width={80}
                   height={35}
